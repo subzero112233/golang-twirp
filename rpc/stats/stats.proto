@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+option go_package = "./rpc/stats";
+
+package stats;
+
+service StatsService {
+  rpc AddStats(AddStatsRequest) returns (AddStatsResponse);
+  rpc GetStats(GetStatsRequest) returns (GetStatsResponse);
+}
+
+message Stats {
+  string player_name = 1;
+  float minutes = 2;
+  int32 field_goals = 3;
+  int32 field_goal_attempts = 4;
+  int32 three_pointers_made = 5;
+  int32 three_pointer_attempts = 6; 
+  int32 free_throws_made = 7;
+  int32 free_throw_attempts = 8; 
+  int32 offensive_rebounds = 9;
+  int32 defensive_rebounds = 10;
+  int32 assists = 11;
+  int32 steals = 12;
+  int32 blocks = 13;
+  int32 turnovers = 14;
+  int32 personal_fouls = 15;
+  int32 points = 16;
+  string team = 17;
+  string opponent = 18;
+  google.protobuf.Timestamp game_date = 19;
+}
+
+message AddStatsRequest {
+    repeated Stats stats = 1;
+}
+
+message GetStatsRequest {
+    string player_name = 1;
+}
+
+message AddStatsResponse {
+    string status = 1;
+}
+
+message GetStatsResponse {
+    repeated Stats stats = 1;
+} 
